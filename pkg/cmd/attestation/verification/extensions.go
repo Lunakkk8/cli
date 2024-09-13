@@ -65,7 +65,7 @@ func verifyCertExtensions(attestation *AttestationProcessingResult, tenant, owne
 
 	certIssuer := attestation.VerificationResult.Signature.Certificate.Extensions.Issuer
 	if !strings.EqualFold(want, certIssuer) {
-		if strings.Index(certIssuer, want) == 0 {
+		if strings.Index(certIssuer, want+"/") == 0 {
 			return fmt.Errorf("expected Issuer to be %s, got %s -- if you have customized the issuer for your enterprise try using the --cert-oidc-issuer flag with your expected issuer", want, certIssuer)
 		} else {
 			return fmt.Errorf("expected Issuer to be %s, got %s", want, certIssuer)
